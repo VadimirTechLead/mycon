@@ -141,13 +141,16 @@ app.use(express.urlencoded()); // to support URL-encoded bodies
 var multer  = require('multer')
 var upload = multer()
 
-const port = 80;
+const port = 3000;
 
 
 app.use('/public', express.static('public', options))
 app.get('/', function (req, res) {
+  console.log(res.connection.localAddress)
+  console.log(res.connection.remoteFamily)
+  console.log(res.connection._peername)
   var options = {
-    root: adres + '\\public\\',
+    root: adres + '/public/',
     dotfiles: 'deny',
     headers: {
       'x-timestamp': Date.now(),
@@ -174,7 +177,7 @@ app.post('/*', function(req, res) {
   } else {
     setBetcoin(res.req.body);
     var options = {
-      root: adres + '\\public\\str\\',
+      root: adres + '/public/str/',
       dotfiles: 'deny',
       headers: {
         'x-timestamp': Date.now(),
