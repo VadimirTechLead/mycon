@@ -141,11 +141,11 @@ app.use(express.urlencoded()); // to support URL-encoded bodies
 var multer  = require('multer')
 var upload = multer()
 
-const port = 3000;
+const port = 80;
 
 
 app.use('/public', express.static('public', options))
-app.get('/', function (req, res) {
+app.get('/*', function (req, res) {
   console.log(res.connection.localAddress)
   console.log(res.connection.remoteFamily)
   console.log(res.connection._peername)
@@ -166,10 +166,6 @@ app.get('/', function (req, res) {
   });
   // res.end();
 })
-app.get('/*', function(req, res) {
-  // console.log(req, res)
-  res.send('hello world');
-});
 app.use(upload.array());
 app.post('/*', function(req, res) {
   if (0/* res.req.originalUrl=="/avtor" */) {
